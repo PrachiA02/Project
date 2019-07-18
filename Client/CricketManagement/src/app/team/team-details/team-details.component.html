@@ -1,0 +1,45 @@
+<h1>{{team.Team_Id}}</h1>
+
+<div class="row"  style="margin-top: 30px;">
+  <div class="col-md-3">
+    <img class="photo" src="http://localhost:3000/{{team.Team_Icon}}" alt="">
+  </div>
+
+  <div class="col-md-9">
+    <div><strong>Team Name: </strong>{{team.Team_Name}}</div>
+    <div><strong>Country : </strong>{{team.Country_Name}}</div>
+    
+    <ng-multiselect-dropdown
+    [placeholder]="'Select Players'"
+    [data]="players"
+    [(ngModel)]="selectedItems"
+    [settings]="dropdownSettings"
+    (onSelect)="onItemSelect($event)"
+    (onSelectAll)="onSelectAll($event)"></ng-multiselect-dropdown>
+
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <button (click)="onSave()" class="btn btn-success">Add</button>
+          <button (click)="onCancel()" class="btn btn-danger" style="margin-left: 10px;">Cancel</button>
+        </div>
+      </div>
+    </div>
+
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Sr. No</th>
+          <th>Player Name</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let player of selectedItems; let i = index">
+          <td>{{ i+1 }}</td>
+          <td>{{player.playerName}}</td>
+        </tr>
+      </tbody>
+    </table>
+    
+  </div>
+</div>
