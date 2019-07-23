@@ -1,0 +1,90 @@
+CREATE DATABASE project;
+
+USE project;
+
+create table USER (
+	User_Id int PRIMARY KEY AUTO_INCREMENT,
+	First_Name varchar(100) NOT NULL,
+	Last_Name varchar(100) NOT NULL,
+	Email varchar(100) NOT NULL,
+	Password varchar(50) NOT NULL
+);
+
+
+CREATE table TEAMS (
+	Team_Id int NOT NULL AUTO_INCREMENT,
+	Team_Name varchar(100) NOT NULL,
+	Country_Name varchar(100) NOT NULL,
+	Team_Icon varchar(500) NULL,
+	PRIMARY KEY(Team_Id)
+);
+
+INSERT INTO TEAMS(Team_Name,Country_Name)VALUES("INDIA","INDIA");
+INSERT INTO TEAMS(Team_Name,Country_Name)VALUES("PAKISTAN","PAKISTAN");
+INSERT INTO TEAMS(Team_Name,Country_Name)VALUES("AUSTRILIA","AUSTRILIA");
+INSERT INTO TEAMS(Team_Name,Country_Name)VALUES("ENGLAND","ENGLAND");
+
+CREATE table PLAYERS(
+	Player_Id int NOT NULL AUTO_INCREMENT,
+	Player_Name varchar(100) NOT NULL,
+	Player_Photo varchar(500) NULL,
+	PRIMARY KEY(Player_Id)
+);
+
+CREATE table TEAMPLAYERMAPPING(
+	Mapping_Id int NOT NULL AUTO_INCREMENT,
+	Team_Id int NOT NULL,
+	Player_Id int NOT NULL,
+	PRIMARY KEY(Mapping_Id),
+ 	FOREIGN KEY(Team_Id) REFERENCES TEAMS(Team_Id) ON DELETE CASCADE,
+ 	FOREIGN KEY(Player_Id) REFERENCES PLAYERS(Player_Id) ON DELETE CASCADE	
+);
+
+
+
+CREATE table MATCHES(
+	Match_Id int NOT NULL AUTO_INCREMENT,
+	Match_Type varchar(100) NOT NULL,
+	Match_Name varchar(100) NOT NULL,
+	Team_A int NOT NULL,
+	Team_B int NOT NULL,
+	Match_Status varchar(50) NOT NULL,
+	Match_Result varchar(50),
+	Winning_Team int,
+	Batting_Team int,
+	Match_Stadium varchar(100),
+	Match_Location varchar(100),
+	PRIMARY KEY(Match_Id)
+);
+
+//Match Status: 1-LIVE, 2-COMPLETED, 3-FUTURE
+//Match Result: 1- DRAW,2-WON, 3-Cancel
+
+
+INSERT INTO MATCHES(Match_Type, Team_A, Team_B, Match_Status, Match_Result, Winning_Team) VALUES("ODI", 1, 2, 2, 2, 1);
+INSERT INTO MATCHES(Match_Type, Team_A, Team_B, Match_Status) VALUES("ODI", 1, 2, 1);
+INSERT INTO MATCHES(Match_Type, Team_A, Team_B, Match_Status) VALUES("ODI", 1, 2, 3);
+	
+CREATE table SCORE(
+	Score_Id int NOT NULL AUTO_INCREMENT,
+	Match_Id int not null,
+	Overs int DEFAULT 0,
+	Balls int NOT NULL,
+	Runs int DEFAULT 0,
+	Bat_Id int NOT NULL,
+	Baller_Id int NOT NULL,
+	Wickets int,
+	Batting_Team int NOT NULL,
+	Discription varchar(500),
+	PRIMARY KEY(Score_id),
+ 	FOREIGN KEY(Match_Id) REFERENCES MATCHES(Match_Id) ON DELETE CASCADE
+);
+
+
+
+INSERT INTO SCORE (Match_Id, Overs, Balls, Runs, Bat_Id, Baller_Id, Wickets, Fours, Sixs, Batting_Team) 
+	values (1, 0, 1, 4, 1, 15, 0, 1, 0, 1);
+INSERT INTO SCORE (Match_Id, Overs, Balls, Runs, Bat_Id, Baller_Id, Wickets, Fours, Sixs, Batting_Team) 
+	values (1, 0, 2, 1, 1, 15, 0, 0, 0, 1);
+INSERT INTO SCORE (Match_Id, Overs, Balls, Runs, Bat_Id, Baller_Id, Wickets, Fours, Sixs, Batting_Team) 
+	values (1, 0, 3, 2, 2, 15, 0, 0, 0, 1);
