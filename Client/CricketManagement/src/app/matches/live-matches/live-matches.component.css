@@ -1,0 +1,55 @@
+.match {
+    height: 300px;
+    margin-top: 50px;
+    background-size: 100% 100%;
+    background-image: url(../../../../src/assets/images/stadium.jpg);
+}
+
+.firstTeam {
+    background-color: white;
+    margin-top: 50px;
+    margin-left: 200px;
+    border-radius: 100px;
+    height: 200px;
+    width: 200px;
+    float: left;
+}
+.team-icon {
+    height: 200px;
+    width: 200px;
+    border-radius: 100px;
+    border: 10px solid silver;
+    padding: 15px;
+}
+.score {
+    color: white;
+    font-weight: 900;
+    font-size: 22px;
+    margin-top: 150px;
+    margin-left: 100px;
+    float: left;
+    text-align: center;
+}
+
+h1 {
+    padding-bottom: 30px;
+}
+a{
+    color: white;
+}
+.secondTeam {
+    background-color: white;
+    margin-top: 50px;
+    margin-left: 100px;
+    border-radius: 100px;
+    height: 200px;
+    width: 200px;
+    float: left;
+}
+
+.teamName {
+    color: white;
+    font-weight: 900;
+    font-size: 25px;
+    padding-left: 65px;
+ }

@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { forkJoin } from 'rxjs';
 import { PlayersService } from 'src/app/players.service';
 import { TeamPlayerMappingService } from 'src/app/team-player-mapping.service';
+import { UserService } from 'src/app/user.service';
 
 @Component({
   selector: 'app-team-details',
@@ -21,6 +22,7 @@ export class TeamDetailsComponent implements OnInit {
   constructor(private teamService: TeamService,
     private playersService: PlayersService,
     private activatedRoute: ActivatedRoute,
+    private userService: UserService,
     private teamPlayerMappingService: TeamPlayerMappingService,
     private router: Router) {
       activatedRoute.queryParams
@@ -107,5 +109,9 @@ export class TeamDetailsComponent implements OnInit {
       }
     });
     return playerName;  
+  }
+
+  isUserLoggedIn() {
+    return this.userService.isUserLogin();
   }
 }

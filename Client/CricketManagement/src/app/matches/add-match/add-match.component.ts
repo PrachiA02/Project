@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TeamService } from 'src/app/team.service';
 import { MatchesService } from 'src/app/matches.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-match',
@@ -12,8 +13,8 @@ export class AddMatchComponent implements OnInit {
   teamDropdownSettings = {};
   firstTeam: any;
   secondTeam: any;
+  battingTeam: any;
   matchName: string;
-  matchDate: string;
   matchStadium: string;
   matchLocation: string;
   selectedMatchType : any;
@@ -35,7 +36,7 @@ export class AddMatchComponent implements OnInit {
     }
   ];
   constructor(private teamService: TeamService,
-    private matchService: MatchesService) {
+    private matchService: MatchesService, private router: Router) {
     this.teamService
     .get()
     .subscribe(response => {
@@ -77,13 +78,34 @@ export class AddMatchComponent implements OnInit {
     console.log(items);
   }
   onAdd() {
-    console.log('Vishal Shevale');
-    console.log(this.firstTeam[0].teamId);
-    console.log(this.secondTeam[0].teamId);
-    console.log(this.matchName);
-    console.log(this.matchDate);
-    console.log(this.matchStadium);
-    console.log(this.matchLocation);
-    console.log(this.selectedMatchType[0].matchTypeId);
+    this.matchService
+    .post(this.matchName,this.firstTeam[0].teamId,
+      this.secondTeam[0].teamId,this.selectedMatchType[0].matchType,
+      this.matchStadium,this.matchLocation,this.battingTeam[0].teamId).subscribe(response=>{
+        console.log(response);
+        const body = response.json();
+        if(body['status']=='success'){
+          
+          this.onCancel();
+        } else {
+          alert(body['error']);
+        }
+      }); 
   }
+  onCancel() {
+    this.router.navigate(['/matches']);
+  }
+  // private getStatusByDates() {
+  //   let todaysDate = new Date();
+  //   let selectedDate = new Date(this.matchDate);
+  //   let todaysDateString = todaysDate.getFullYear()+"-"+todaysDate.getMonth()+"-"+todaysDate.getDate();
+  //   let selectedDateString = selectedDate.getFullYear()+"-"+selectedDate.getMonth()+"-"+selectedDate.getDate();
+  //   if(todaysDateString === selectedDateString)
+  //   {
+  //    return "LIVE"; 
+  //   } else
+  //   {
+  //     return "FUTURE";
+  //   }
+  // }
 }

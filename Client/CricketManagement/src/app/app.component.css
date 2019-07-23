@@ -1,6 +1,6 @@
-.cricket-management {
+/* .cricket-management {
     background-color: #d7dae0;
-}
+} */
 
 .logo {
     margin-top: -7px;
@@ -15,3 +15,10 @@
     text-decoration: none;
 }
 
+.user{
+    padding-top: 15px;
+    color: white;
+}
+.navbar-inverse .navbar-nav>li>a{
+    color: white;
+}

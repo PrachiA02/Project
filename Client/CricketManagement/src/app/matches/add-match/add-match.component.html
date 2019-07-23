@@ -33,12 +33,6 @@
   </div>
   <div class="col-md-6">
     <div class="form-group">
-      <label for="">Match Date</label>
-      <input [(ngModel)]="matchDate" type="date" class="form-control">
-    </div>
-  </div>
-  <div class="col-md-6">
-    <div class="form-group">
       <label for="">Match Stadium</label>
       <input [(ngModel)]="matchStadium" type="text" class="form-control">
     </div>
@@ -59,6 +53,18 @@
     <div class="form-group">
       <label for="">Match Location</label>
       <input [(ngModel)]="matchLocation" type="text" class="form-control">
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="form-group">
+      <label for="">Batting Team</label>
+      <ng-multiselect-dropdown
+        [placeholder]="'Select Batting Team'"
+        [data]="teams"
+        [(ngModel)]="battingTeam"
+        [settings]="teamDropdownSettings"
+        (onSelect)="onItemSelect($event)"
+        (onSelectAll)="onSelectAll($event)"></ng-multiselect-dropdown>
     </div>
   </div>
 </div>

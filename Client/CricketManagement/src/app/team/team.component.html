@@ -1,6 +1,6 @@
 <div class="container">
   <div class="pull-right buttons">
-    <button (click)="onAddTeam()" class="btn btn-success add-team">Add Team</button>
+    <button *ngIf="isUserLoggedIn()" (click)="onAddTeam()" class="btn btn-success add-team">Add Team</button>
     <button (click)="toggleGrid()" type="button" class="btn btn-primary">
       <i
         [class.glyphicon-align-justify]="isGrid == true"
@@ -17,7 +17,7 @@
     class="col-md-3"
     *ngFor="let team of teams">
 
-    <button (click)="onDelete(team)" class="btn btn-danger delete-button">
+    <button *ngIf="isUserLoggedIn()" (click)="onDelete(team)" class="btn btn-danger delete-button">
       <i class="glyphicon glyphicon-trash"></i>
     </button>
     <img class="team-icon" src="http://localhost:3000/{{team.Team_Icon}}" alt="">
@@ -32,15 +32,15 @@
         <th>Team Id</th>
         <th>Team Name</th>
         <th>Country</th>
-        <th>Action</th>
+        <th *ngIf="isUserLoggedIn()">Action</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let team of teams">
+      <tr *ngFor="let team of teams" (click)="onSelectTeam(team)">
         <td>{{team.Team_Id}}</td>
         <td>{{team.Team_Name}}</td>
         <td>{{team.Country_Name}}</td>
-        <td class="action">
+        <td class="action" *ngIf="isUserLoggedIn()">
             <button (click)="onDelete(team)" class="btn btn-danger delete-button">
                 <i class="glyphicon glyphicon-trash"></i>
             </button>

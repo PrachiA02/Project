@@ -1,0 +1,14 @@
+<div class="container match" *ngFor="let match of liveMatches">
+<div class="firstTeam">
+  <img class="team-icon" src="http://localhost:3000/{{match.teamAIcon}}" alt="">
+  <span class="teamName">{{match.teamAName}}</span>
+</div>
+<div class="score">
+  <h1>VS</h1>
+  <a href="./view-score/?id={{match.matchId}}">View Score</a>
+</div>
+<div class="secondTeam">
+  <img class="team-icon" src="http://localhost:3000/{{match.teamBIcon}}" alt="">
+  <span class="teamName">{{match.teamBName}}</span>
+</div>
+</div>

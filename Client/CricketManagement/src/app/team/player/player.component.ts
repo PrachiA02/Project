@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { PlayersService } from 'src/app/players.service';
+import { UserService } from 'src/app/user.service';
 
 @Component({
   selector: 'app-player',
@@ -14,7 +15,8 @@ export class PlayerComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private playerService: PlayersService
+    private playerService: PlayersService,
+    private userService: UserService
   ) { 
     this.loadPlayers();
   }
@@ -58,5 +60,8 @@ export class PlayerComponent implements OnInit {
 
   onAddPlayer() {
     this.router.navigate(['/add-player']);
+  }
+  isUserLoggedIn() {
+    return this.userService.isUserLogin();
   }
 }

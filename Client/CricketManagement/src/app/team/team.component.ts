@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TeamService } from '../team.service';
 import { Router } from '@angular/router';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'app-team',
@@ -13,7 +14,8 @@ export class TeamComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private teamService: TeamService
+    private teamService: TeamService,
+    private userService: UserService
   ) { 
     this.loadTeams();
   }
@@ -57,5 +59,9 @@ export class TeamComponent implements OnInit {
 
   onAddTeam() {
     this.router.navigate(['/add-team']);
+  }
+
+  isUserLoggedIn() {
+    return this.userService.isUserLogin();
   }
 }

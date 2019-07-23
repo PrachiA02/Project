@@ -1,0 +1,103 @@
+.team1-wrapper, .team2-wrapper {
+    width: 40%;
+}
+.team1-label{
+    float: left;
+    height: 50px;
+    width: 100%;
+    background-color: black;
+    color: white;
+    font-size: 25px;
+    font-weight: 900;
+    padding-left: 10px;
+    padding-top: 10px;
+}
+.team2 {
+    float: left;
+    height: 50px;
+    width: 100%;
+    background-color: black;
+    color: white;
+    font-size: 25px;
+    font-weight: 900;
+    padding-left: 10px;
+    padding-top: 10px;
+}
+.separator {
+    height: 50px;
+    width: 100px;
+    text-align: center;
+    background-color: white;
+    color: black;
+    float: left;
+    font-size: 25px;
+    font-weight: 900;
+}
+.team2 {
+    text-align: right;
+    padding-right: 10px;
+}
+.btn-div {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    justify-content: center;
+    display: flex;
+}
+.score {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    justify-content: center;
+    display: flex;
+}
+.score-btn {
+    margin-right: 20px;
+    border-radius: 20px;
+    margin-top: 15px;
+}
+
+.match-type {
+    text-align: center;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.link{
+    margin-left: 530px;
+    font-size: 15px;
+    margin-top: 15px;
+}
+
+ .button {
+    background-color: red;
+    border-radius: 50px;
+    color: #FFFFFF;
+    display: inline-block;
+    font-size: 20px;
+    padding: 0px 10px;
+    text-align: center;
+    font-weight: 900;
+    margin-left: 530px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+.topmargin {
+    margin-top: 20px;
+}
+
+.leftPadding {
+    margin-left: 20px;
+}
+
+.batting {
+    color: #16ef2a;
+}
+
+.team2-score {
+    height: 215px;
+}
+.team1-score {
+    height: 215px;
+}
+.team-inning-change {
+    margin-left: 15px;
+}

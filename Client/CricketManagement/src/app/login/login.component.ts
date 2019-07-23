@@ -26,17 +26,7 @@ export class LoginComponent implements OnInit {
       alert('enter password');
     } else {
       this.userService
-        .login(this.email, this.password)
-        .subscribe(response => {
-          const body = response.json();
-          if (body['status'] == 'success') {
-            sessionStorage['login_status'] = '1';
-            alert('welcome to the app');
-            this.router.navigate(['/movie-add']);
-          } else {
-            alert(body['error']);
-          }
-        });
+        .login(this.email, this.password);
     }
   }
 

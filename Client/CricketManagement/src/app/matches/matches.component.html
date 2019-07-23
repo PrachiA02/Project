@@ -1,3 +1,40 @@
-<p>
-  matches works!
-</p>
+<div class="container">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Sr No.</th>
+        <th>Match/ Series</th>
+        <th>First Team</th>
+        <th>Second Team</th>
+        <th>Match Type</th>
+        <th>Date</th>
+        <th>Match Stadium</th>
+        <th>Match Location</th>
+        <th>Match Status</th>
+        <th>Match Result</th>
+        <th>Winning Team</th>
+        <th>Update Score</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let match of matches;let i=index">
+        <td>{{i+1}}</td>
+        <td>{{match.Match_Name}}</td>
+        <td>{{match.Team_A}}</td>
+        <td>{{match.Team_B}}</td>
+        <td>{{match.Match_Type}}</td>  
+        <td>{{match.Match_Date}}</td>
+        <td>{{match.Match_Stadium}}</td>
+        <td>{{match.Match_Location}}</td>
+        <td>{{match.Match_Status}}</td>
+        <td>{{match.Match_Result}}</td>
+        <td>{{match.Winning_Team}}</td>
+        <td>
+          <button *ngIf="match.Match_Status==='LIVE'" (click)="onUpdateScore(match)" class="btn btn-warning edit-button">
+            <i class="glyphicon glyphicon-edit"></i>
+        </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

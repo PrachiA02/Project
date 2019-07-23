@@ -6,16 +6,27 @@ const router = express.Router();
 
 router.get('/match/:id', (request, response) => {
     const id = request.params.id;
-    const statement = `select Team_Id, Team_Name, Country_Name, Team_Icon from TEAMS where Team_Id = ${id}`;
+    console.log('---------------------'+id);
+    const statement = `select * from MATCHES where Match_Id = ${id}`;
     const connection = db.connect();
-    connection.query(statement, (error, teams) => {
+    connection.query(statement, (error, matches) => {
         connection.end();
-        response.send(utils.createResponse(error, teams[0]));
+        response.send(utils.createResponse(error, matches[0]));
+    });
+});
+
+router.get('/match/status/:status', (request, response) => {
+    const status = request.params.status;
+    const statement = `select * from MATCHES where Match_Status = "${status}"`;
+    const connection = db.connect();
+    connection.query(statement, (error, matches) => {
+        connection.end();
+        response.send(utils.createResponse(error, matches));
     });
 });
 
 router.get('/match', (request, response) => {
-    const statement = `select Team_Id, Team_Name, Country_Name, Team_Icon from TEAMS`;
+    const statement = `select * from MATCHES`;
     const connection = db.connect();
     connection.query(statement, (error, teams) => {
         connection.end();
@@ -33,6 +44,35 @@ router.delete('/match/:id', (request, response) => {
     });
 });
 
+router.put('/match/inning', (request, response) => {
+    const matchId = request.body.matchId;
+    const battingTeam = request.body.battingTeam;
+    
+    const statement = `UPDATE MATCHES SET Batting_Team = ${battingTeam} where Match_Id= ${matchId}`;
+
+    console.log(statement);
+    const connection = db.connect();
+    connection.query(statement, (error, matches) => {
+        connection.end();
+        response.send(utils.createResponse(error, matches));
+    });
+});
+
+router.put('/match/status', (request, response) => {
+    const matchId = request.body.matchId;
+    const winningTeam = request.body.winningTeam ? request.body.winningTeam : NULL;
+    const matchStatus = winningTeam ? 'COMPLETED' : 'DRAW';
+    
+    const statement = `UPDATE MATCHES SET Match_Status = '${matchStatus}', Winning_Team = ${winningTeam} where Match_Id= ${matchId}`;
+
+    console.log(statement);
+    const connection = db.connect();
+    connection.query(statement, (error, matches) => {
+        connection.end();
+        response.send(utils.createResponse(error, matches));
+    });
+});
+
 router.post('/match', (request, response) => {
     const team1 = request.body.team1;
     const team2 = request.body.team2;
@@ -40,12 +80,12 @@ router.post('/match', (request, response) => {
     const location = request.body.location;
     const matchType = request.body.matchType;
     const matchName = request.body.matchName;
-    const date = request.body.date;
+    const battingTeam = request.body.battingTeam;
     const matchStatus =request.body.matchStatus;
     
     const statement = `insert into MATCHES
-        (Match_Type,Match_Name,Team_A,Team_B,Match_Status,Match_Date,Match_Stadium,Match_Location) values 
-        ('${matchType}', '${matchName}', '${team1}', '${team2}', '${matchStatus}', '${date}', '${stadium}', '${location}')`;
+        (Match_Type,Match_Name,Team_A,Team_B,Match_Status,Batting_Team,Match_Stadium,Match_Location) values 
+        ('${matchType}', '${matchName}', '${team1}', '${team2}', '${matchStatus}', '${battingTeam}', '${stadium}', '${location}')`;
 
     console.log(statement);
     const connection = db.connect();

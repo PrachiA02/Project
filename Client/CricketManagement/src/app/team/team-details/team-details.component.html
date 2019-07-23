@@ -8,24 +8,24 @@
   <div class="col-md-9">
     <div><strong>Team Name: </strong>{{team.Team_Name}}</div>
     <div><strong>Country : </strong>{{team.Country_Name}}</div>
-    
-    <ng-multiselect-dropdown
-    [placeholder]="'Select Players'"
-    [data]="players"
-    [(ngModel)]="selectedItems"
-    [settings]="dropdownSettings"
-    (onSelect)="onItemSelect($event)"
-    (onSelectAll)="onSelectAll($event)"></ng-multiselect-dropdown>
+    <div *ngIf="isUserLoggedIn()">
+      <ng-multiselect-dropdown
+      [placeholder]="'Select Players'"
+      [data]="players"
+      [(ngModel)]="selectedItems"
+      [settings]="dropdownSettings"
+      (onSelect)="onItemSelect($event)"
+      (onSelectAll)="onSelectAll($event)"></ng-multiselect-dropdown>
 
-    <div class="row">
-      <div class="col-md-6">
-        <div class="form-group">
-          <button (click)="onSave()" class="btn btn-success">Add</button>
-          <button (click)="onCancel()" class="btn btn-danger" style="margin-left: 10px;">Cancel</button>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <button (click)="onSave()" class="btn btn-success">Save</button>
+            <button (click)="onCancel()" class="btn btn-danger" style="margin-left: 10px;">Cancel</button>
+          </div>
         </div>
       </div>
     </div>
-
     <table class="table table-striped">
       <thead>
         <tr>

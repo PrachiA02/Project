@@ -21,21 +21,22 @@
             <li class="dropdown" dropdown> 
                 <a dropdownToggle role="button">Matches <span class="caret"></span></a>
                 <ul *dropdownMenu class="dropdown-menu">
-                    <li><a routerLink="./add-match" routerLinkActive="active">Add Matches</a></li>
-                    <li role="separator" class="divider"></li>
-                    <li><a href="#">Live Matches</a></li>
-                    <li role="separator" class="divider"></li>
-                    <li><a href="#">Previous Matches</a></li>
+                    <li *ngIf="isUserLoggedIn()"><a routerLink="./add-match" routerLinkActive="active">Add Matches</a></li>
+                    <li *ngIf="isUserLoggedIn()" role="separator" class="divider"></li>
+                    <li><a routerLink="./matches" routerLinkActive="active">Matches</a></li>
                 </ul>
             </li>
         </ul>
         <ul class="nav navbar-nav navbar-right" >
-            <li><a routerLink="./login" routerLinkActive="active" class="login">Login</a></li>
+            <li *ngIf="!isUserLoggedIn()"><a routerLink="./login" routerLinkActive="active" class="login">Login</a></li>
+            <li *ngIf="isUserLoggedIn()" class="user">{{userName}}</li>            
+            <li *ngIf="isUserLoggedIn()"><a routerLink="" (click)="logout()" class="login">Logout</a></li>
+        </ul>
+        
+        <ul class="nav navbar-nav navbar-right" >
+                <li><a routerLink="./contact-us" routerLinkActive="active">Contact Us</a></li>           
         </ul>
     </div>
   </nav>
-
-
 <router-outlet></router-outlet>
-
 </div>

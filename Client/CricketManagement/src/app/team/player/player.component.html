@@ -1,6 +1,6 @@
 <div class="container">
     <div class="pull-right buttons">
-      <button (click)="onAddPlayer()" class="btn btn-success add-player">Add Player</button>
+      <button *ngIf="isUserLoggedIn()" (click)="onAddPlayer()" class="btn btn-success add-player">Add Player</button>
       <button (click)="toggleGrid()" type="button" class="btn btn-primary">
         <i
           [class.glyphicon-align-justify]="isGrid == true"
@@ -17,7 +17,7 @@
       class="col-md-3"
       *ngFor="let player of players">
   
-      <button (click)="onDelete(player)" class="btn btn-danger delete-button">
+      <button *ngIf="isUserLoggedIn()" (click)="onDelete(player)" class="btn btn-danger delete-button">
         <i class="glyphicon glyphicon-trash"></i>
       </button>
       <img class="player-icon" src="http://localhost:3000/{{player.Player_Photo}}" alt="">
@@ -31,14 +31,14 @@
         <tr>
           <th>Player Id</th>
           <th>Player Name</th>
-          <th>Action</th>
+          <th *ngIf="isUserLoggedIn()">Action</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let player of players">
           <td>{{player.Player_Id}}</td>
           <td>{{player.Player_Name}}</td>
-          <td class="action">
+          <td *ngIf="isUserLoggedIn()" class="action">
               <button (click)="onDelete(player)" class="btn btn-danger delete-button">
                   <i class="glyphicon glyphicon-trash"></i>
               </button>

@@ -21,4 +21,8 @@ export class TeamPlayerMappingService {
   delete(teamId: number) {
     return this.http.delete(this.url + '/' + teamId);
   }
+
+  getPlayersByTeamId(teamId: number) {
+    return this.http.get(this.url + '/getPlayersByTeam/' + teamId);
+  }
 }

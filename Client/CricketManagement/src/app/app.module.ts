@@ -20,6 +20,10 @@ import { TeamDetailsComponent } from './team/team-details/team-details.component
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { MatchesComponent } from './matches/matches.component';
 import { AddMatchComponent } from './matches/add-match/add-match.component';
+import { LiveMatchesComponent } from './matches/live-matches/live-matches.component';
+import { UpdateScoreComponent } from './matches/update-score/update-score.component';
+import { ContactUsComponent } from './contact-us/contact-us.component';
+import { ViewScoreComponent } from './matches/view-score/view-score.component';
 
 
 @NgModule({
@@ -35,7 +39,11 @@ import { AddMatchComponent } from './matches/add-match/add-match.component';
     PlayerDetailsComponent,
     TeamDetailsComponent,
     MatchesComponent,
-    AddMatchComponent
+    AddMatchComponent,
+    LiveMatchesComponent,
+    UpdateScoreComponent,
+    ContactUsComponent,
+    ViewScoreComponent
   ],
   imports: [
     BrowserModule,
@@ -51,12 +59,16 @@ import { AddMatchComponent } from './matches/add-match/add-match.component';
       { path: '', component: HomeCarouselComponent},
       { path: 'signup', component: SignupComponent },
       { path: 'team', component: TeamComponent },
-      { path: 'add-team', component: AddTeamComponent },
+      { path: 'add-team', component: AddTeamComponent, canActivate: [UserService] },
       { path: 'player', component: PlayerComponent },
-      { path: 'add-player', component: AddPlayerComponent},
+      { path: 'add-player', component: AddPlayerComponent, canActivate: [UserService]},
       { path: 'player-details', component: PlayerDetailsComponent},
       { path: 'team-details', component: TeamDetailsComponent},
-      { path: 'add-match', component: AddMatchComponent}
+      { path: 'add-match', component: AddMatchComponent, canActivate: [UserService]},
+      { path: 'matches', component: MatchesComponent},
+      { path: 'update-score', component: UpdateScoreComponent},
+      { path: 'contact-us',component:ContactUsComponent},
+      { path: 'view-score', component:ViewScoreComponent}
     ])
   ],
   exports: [BsDropdownModule],

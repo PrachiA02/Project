@@ -40,5 +40,17 @@ router.delete('/teamPlayerMapping/:id', (request, response) => {
     });
 });
 
+router.get('/teamPlayerMapping/getPlayersByTeam/:id', (request, response) => {
+    const teamId = request.params.id;
+    const statement = `SELECT p.Player_Id, p.Player_Name from PLAYERS p 
+                        INNER JOIN TEAMPLAYERMAPPING tm ON p.Player_Id = tm.Player_Id 
+                        INNER JOIN TEAMS t ON tm.Team_Id = t.Team_Id where t.Team_Id = ${teamId}`;
+    const connection = db.connect();
+    connection.query(statement, (error, players) => {
+        connection.end();
+        response.send(utils.createResponse(error, players));
+    });
+});
+
 
 module.exports = router;
