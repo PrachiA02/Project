@@ -19,15 +19,18 @@ CREATE table TEAMS (
 	PRIMARY KEY(Team_Id)
 );
 
-INSERT INTO TEAMS(Team_Name,Country_Name)VALUES("INDIA","INDIA");
-INSERT INTO TEAMS(Team_Name,Country_Name)VALUES("PAKISTAN","PAKISTAN");
-INSERT INTO TEAMS(Team_Name,Country_Name)VALUES("AUSTRILIA","AUSTRILIA");
-INSERT INTO TEAMS(Team_Name,Country_Name)VALUES("ENGLAND","ENGLAND");
-
 CREATE table PLAYERS(
 	Player_Id int NOT NULL AUTO_INCREMENT,
 	Player_Name varchar(100) NOT NULL,
 	Player_Photo varchar(500) NULL,
+	Age int,
+	BirthDate varchar(100),
+	MajorTeams varchar(100),
+	PlayingRole varchar(100), 
+	BatingStyle varchar(100),
+	BowlingStyle varchar(100), 
+	Description varchar(500), 
+	NativePlace varchar(100),
 	PRIMARY KEY(Player_Id)
 );
 
@@ -57,14 +60,6 @@ CREATE table MATCHES(
 	PRIMARY KEY(Match_Id)
 );
 
-//Match Status: 1-LIVE, 2-COMPLETED, 3-FUTURE
-//Match Result: 1- DRAW,2-WON, 3-Cancel
-
-
-INSERT INTO MATCHES(Match_Type, Team_A, Team_B, Match_Status, Match_Result, Winning_Team) VALUES("ODI", 1, 2, 2, 2, 1);
-INSERT INTO MATCHES(Match_Type, Team_A, Team_B, Match_Status) VALUES("ODI", 1, 2, 1);
-INSERT INTO MATCHES(Match_Type, Team_A, Team_B, Match_Status) VALUES("ODI", 1, 2, 3);
-	
 CREATE table SCORE(
 	Score_Id int NOT NULL AUTO_INCREMENT,
 	Match_Id int not null,
@@ -79,12 +74,3 @@ CREATE table SCORE(
 	PRIMARY KEY(Score_id),
  	FOREIGN KEY(Match_Id) REFERENCES MATCHES(Match_Id) ON DELETE CASCADE
 );
-
-
-
-INSERT INTO SCORE (Match_Id, Overs, Balls, Runs, Bat_Id, Baller_Id, Wickets, Fours, Sixs, Batting_Team) 
-	values (1, 0, 1, 4, 1, 15, 0, 1, 0, 1);
-INSERT INTO SCORE (Match_Id, Overs, Balls, Runs, Bat_Id, Baller_Id, Wickets, Fours, Sixs, Batting_Team) 
-	values (1, 0, 2, 1, 1, 15, 0, 0, 0, 1);
-INSERT INTO SCORE (Match_Id, Overs, Balls, Runs, Bat_Id, Baller_Id, Wickets, Fours, Sixs, Batting_Team) 
-	values (1, 0, 3, 2, 2, 15, 0, 0, 0, 1);
