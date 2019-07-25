@@ -2,7 +2,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { CarouselModule } from 'ngx-bootstrap/carousel';
-import { SelectDropDownModule } from 'ngx-select-dropdown'
 import { AppComponent } from './app.component';
 import { HomeCarouselComponent } from './home-carousel/home-carousel.component';
 import { LoginComponent } from './login/login.component';
@@ -51,7 +50,6 @@ import { ViewScoreComponent } from './matches/view-score/view-score.component';
     HttpModule,
     BsDropdownModule.forRoot(),
     CarouselModule.forRoot(),
-    SelectDropDownModule,
     NgMultiSelectDropDownModule.forRoot(),
     RouterModule.forRoot([
       { path: 'login', component: LoginComponent},
