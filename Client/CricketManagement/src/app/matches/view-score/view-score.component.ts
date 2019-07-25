@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { MatchesService } from 'src/app/matches.service';
 import { TeamService } from 'src/app/team.service';
 import { forkJoin } from 'rxjs';
+import { TeamPlayerMappingService } from 'src/app/team-player-mapping.service';
 
 @Component({
   selector: 'app-view-score',
@@ -22,11 +23,13 @@ export class ViewScoreComponent implements OnInit {
   teamAName : string;
   matchType: string;
   detailScore = [];
+  allPlayers = [];
 
   constructor(private scoreService: ScoreService,
     private activatedRoute: ActivatedRoute,
     private matchService: MatchesService,
-    private teamService: TeamService) {
+    private teamService: TeamService,
+    private teamPlayerMappingService: TeamPlayerMappingService) {
       activatedRoute.queryParams
         .subscribe(params => {
           this.matchId = params['id'];
@@ -64,6 +67,7 @@ export class ViewScoreComponent implements OnInit {
             this.battingTeamId = matchesResponseBody.data.Batting_Team;
             this.getUpdatedScore();
             this.getOtherTeamScore();
+            this.getPlayersForBothTeams();
             this.getUpdatedScoreDetails();
           });
     });
@@ -94,9 +98,26 @@ export class ViewScoreComponent implements OnInit {
           run: score.Runs,
           wickets: score.Wickets,
           discription: score.Discription,
-          batId: score.Bat_Id,
-          ballerId: score.Baller_Id
+          batId: this.allPlayers[score.Bat_Id] ? this.allPlayers[score.Bat_Id] : score.Bat_Id,
+          ballerId: this.allPlayers[score.Baller_Id] ? this.allPlayers[score.Baller_Id] : score.Baller_Id
         });
+      });
+    });
+  }
+  private getPlayersForBothTeams() {
+    let teamAPlayersRequest = this.teamPlayerMappingService.getPlayersByTeamId(this.teamAId);
+    let teamBPlayersRequest = this.teamPlayerMappingService.getPlayersByTeamId(this.teamBId);
+    forkJoin(teamAPlayersRequest, teamBPlayersRequest)
+    .subscribe(response =>{
+      this.allPlayers = [];
+      let teamAPlayersResponse = response[0].json();
+      teamAPlayersResponse.data.forEach(player => {
+        this.allPlayers[player.Player_Id] = player.Player_Name;
+      });
+
+      let teamBPlayersResponse = response[1].json();
+      teamBPlayersResponse.data.forEach(player => {
+        this.allPlayers[player.Player_Id] = player.Player_Name;
       });
     });
   }

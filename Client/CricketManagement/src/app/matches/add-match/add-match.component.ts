@@ -18,7 +18,7 @@ export class AddMatchComponent implements OnInit {
   matchStadium: string;
   matchLocation: string;
   selectedMatchType : any;
-
+  
   teams = [];
   matchTypes = [
     {
@@ -73,6 +73,9 @@ export class AddMatchComponent implements OnInit {
   }
   onItemSelect(item: any) {
     console.log(item);
+  }
+  onTeamASelect(team: any){
+    
   }
   onSelectAll(items: any) {
     console.log(items);

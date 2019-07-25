@@ -1,3 +1,18 @@
 h1 {
     text-align: center;
-  }
+}
+
+.image{
+  height:40em; 
+  background-size:cover;
+  width:auto;
+  background-image: url(../../../../src/assets/images/stadium.jpg);
+  background-position:50% 50%;
+}
+
+.white-background{
+  background: white;
+}
+.white {
+  color: white;
+}

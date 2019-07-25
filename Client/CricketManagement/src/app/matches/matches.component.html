@@ -13,7 +13,7 @@
         <th>Match Status</th>
         <th>Match Result</th>
         <th>Winning Team</th>
-        <th>Update Score</th>
+        <th *ngIf="isUserLoggedIn()">Update Score</th>
       </tr>
     </thead>
     <tbody>
@@ -30,7 +30,7 @@
         <td>{{match.Match_Result}}</td>
         <td>{{match.Winning_Team}}</td>
         <td>
-          <button *ngIf="match.Match_Status==='LIVE'" (click)="onUpdateScore(match)" class="btn btn-warning edit-button">
+          <button *ngIf="match.Match_Status==='LIVE' && isUserLoggedIn()" (click)="onUpdateScore(match)" class="btn btn-warning edit-button">
             <i class="glyphicon glyphicon-edit"></i>
         </button>
         </td>

@@ -3,6 +3,7 @@ import { MatchesService } from '../matches.service';
 import { TeamService } from '../team.service';
 import { forkJoin } from 'rxjs';
 import { Router } from '@angular/router';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'app-matches',
@@ -14,7 +15,8 @@ matches=[];
 teams=[];
   constructor(private matchService:MatchesService,
     private teamservice:TeamService,
-    private router: Router) { 
+    private router: Router,
+    private userService: UserService) { 
     let teamResponse = this.teamservice.get();
     let matchesResponse = this.matchService.get();
     forkJoin(teamResponse, matchesResponse).subscribe(response=>{
@@ -66,5 +68,9 @@ teams=[];
 
   onUpdateScore(match) {
     this.router.navigate(['/update-score'], { queryParams: { id: match.Match_Id } });
+  }
+
+  isUserLoggedIn(){
+    return this.userService.isUserLogin();
   }
 }
