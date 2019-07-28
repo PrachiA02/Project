@@ -17,7 +17,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let match of matches;let i=index">
+      <tr *ngFor="let match of matches;let i=index" (click)="viewCompletedMatchScore(match)">
         <td>{{i+1}}</td>
         <td>{{match.Match_Name}}</td>
         <td>{{match.Team_A}}</td>

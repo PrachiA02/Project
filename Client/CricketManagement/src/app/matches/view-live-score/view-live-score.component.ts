@@ -1,30 +1,29 @@
 import { Component, OnInit } from '@angular/core';
+import { forkJoin } from 'rxjs';
 import { ScoreService } from 'src/app/score.service';
 import { ActivatedRoute } from '@angular/router';
 import { MatchesService } from 'src/app/matches.service';
 import { TeamService } from 'src/app/team.service';
-import { forkJoin } from 'rxjs';
 import { TeamPlayerMappingService } from 'src/app/team-player-mapping.service';
 
 @Component({
-  selector: 'app-view-score',
-  templateUrl: './view-score.component.html',
-  styleUrls: ['./view-score.component.css']
+  selector: 'app-view-live-score',
+  templateUrl: './view-live-score.component.html',
+  styleUrls: ['./view-live-score.component.css']
 })
-export class ViewScoreComponent implements OnInit {
+export class ViewLiveScoreComponent implements OnInit {
+
   matchId: number;
   teamAScore : any;
   teamBScore : any;
   battingTeamId : number;
-  winningTeamId : number;
   teamBId: number;
   teamAId: number;
   allTeams = [];
   teamBName : string;
   teamAName : string;
   matchType: string;
-  detailScoreA = [];
-  detailScoreB = [];
+  detailScore = [];
   allPlayers = [];
 
   constructor(private scoreService: ScoreService,
@@ -67,12 +66,10 @@ export class ViewScoreComponent implements OnInit {
             this.teamBId = teamB.teamId;
             this.teamBName = teamB.teamName;
             this.battingTeamId = matchesResponseBody.data.Batting_Team;
-            this.winningTeamId = matchesResponseBody.data.Winning_Team
             this.getUpdatedScore();
             this.getOtherTeamScore();
             this.getPlayersForBothTeams();
-            this.getUpdatedScoreDetails1();
-            this.getUpdatedScoreDetails2();
+            this.getUpdatedScoreDetails();
           });
     });
   }
@@ -92,30 +89,13 @@ export class ViewScoreComponent implements OnInit {
         };
     });
   }
-  private getUpdatedScoreDetails1(){
-    this.scoreService.getRecentScoreByMatchId(this.matchId, this.teamAId)
+  private getUpdatedScoreDetails(){
+    this.scoreService.getRecentScoreByMatchId(this.matchId, this.battingTeamId)
     .subscribe(response => {
       let scoreResponse = response.json();
-      this.detailScoreA = [];
+      this.detailScore = [];
       scoreResponse.data.forEach(score => {
-        this.detailScoreA.push({
-          run: score.Runs,
-          wickets: score.Wickets,
-          discription: score.Discription,
-          batId: this.allPlayers[score.Bat_Id] ? this.allPlayers[score.Bat_Id] : score.Bat_Id,
-          ballerId: this.allPlayers[score.Baller_Id] ? this.allPlayers[score.Baller_Id] : score.Baller_Id
-        });
-      });
-    });
-  }
-
-  private getUpdatedScoreDetails2(){
-    this.scoreService.getRecentScoreByMatchId(this.matchId, this.teamBId)
-    .subscribe(response => {
-      let scoreResponse = response.json();
-      this.detailScoreB = [];
-      scoreResponse.data.forEach(score => {
-        this.detailScoreB.push({
+        this.detailScore.push({
           run: score.Runs,
           wickets: score.Wickets,
           discription: score.Discription,

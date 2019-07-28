@@ -23,6 +23,7 @@ import { LiveMatchesComponent } from './matches/live-matches/live-matches.compon
 import { UpdateScoreComponent } from './matches/update-score/update-score.component';
 import { ContactUsComponent } from './contact-us/contact-us.component';
 import { ViewScoreComponent } from './matches/view-score/view-score.component';
+import { ViewLiveScoreComponent } from './matches/view-live-score/view-live-score.component';
 
 
 @NgModule({
@@ -42,7 +43,8 @@ import { ViewScoreComponent } from './matches/view-score/view-score.component';
     LiveMatchesComponent,
     UpdateScoreComponent,
     ContactUsComponent,
-    ViewScoreComponent
+    ViewScoreComponent,
+    ViewLiveScoreComponent
   ],
   imports: [
     BrowserModule,
@@ -66,7 +68,8 @@ import { ViewScoreComponent } from './matches/view-score/view-score.component';
       { path: 'matches', component: MatchesComponent},
       { path: 'update-score', component: UpdateScoreComponent},
       { path: 'contact-us',component:ContactUsComponent},
-      { path: 'view-score', component:ViewScoreComponent}
+      { path: 'view-score', component:ViewScoreComponent},
+      { path: 'view-live-score', component:ViewLiveScoreComponent}
     ])
   ],
   exports: [BsDropdownModule],

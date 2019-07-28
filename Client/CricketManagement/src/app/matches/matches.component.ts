@@ -70,6 +70,12 @@ teams=[];
     this.router.navigate(['/update-score'], { queryParams: { id: match.Match_Id } });
   }
 
+  viewCompletedMatchScore(match) {
+    if(match.Match_Status==='COMPLETED') {
+      this.router.navigate(['/view-score'], { queryParams: { id: match.Match_Id } });
+    }
+  }
+
   isUserLoggedIn(){
     return this.userService.isUserLogin();
   }

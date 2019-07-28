@@ -1,22 +1,12 @@
 
 <div class="container">
 
-    <div class="btn-div">
-      <button (click)="onAddTeam()" class="btn score-btn">Score Card</button>
-      <button (click)="onAddTeam()" class="btn score-btn">Team Details</button>
-    </div>
-    <div>
-        <a href="javascript:window.location.href=window.location.href" class="link">Refresh Page</a>
-    </div> 
-    <div>
-        <button type="submit" class="button">Live</button>
-    </div>
     <div class="match-type">{{matchType}}</div>
     <div class="score">
           <div class="team1-wrapper">
               <div class="team1-label">
                   {{teamAName}}
-                  <span class="batting" *ngIf="teamAId === battingTeamId">- Batting </span>
+                  <span class="batting" *ngIf="teamAId === winningTeamId">- WON </span>
                 </div>
                 <div class="team1-score">
                     <div class="topmargin">
@@ -32,13 +22,33 @@
                         <label>Overs: {{teamAScore.overs}}</label>
                     </div>
                 </div>  
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th>Run</th>
+                      <th>Wicket</th>
+                      <th>Batsman</th>
+                      <th>Bowler</th>
+                      <th>Discription</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let score of detailScoreA">
+                      <td>{{score.run}}</td>
+                      <td>{{score.wickets}}</td>
+                      <td>{{score.batId}}</td>
+                      <td>{{score.ballerId}}</td>
+                      <td>{{score.discription}}</td>
+                    </tr>
+                  </tbody>
+                </table>
           </div>
           <div class="separator">
           VS
           </div>
           <div class="team2-wrapper">
             <div class="team2">
-                <span  class="batting" *ngIf="teamBId === battingTeamId">Batting - </span>
+                <span  class="batting" *ngIf="teamBId === winningTeamId">WON - </span>
                 {{teamBName}}
               </div>
               
@@ -55,27 +65,27 @@
                   <div class="">
                       <label>Overs: {{teamBScore.overs}}</label>
                   </div>
-              </div>  
+              </div> 
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th>Run</th>
+                    <th>Wicket</th>
+                    <th>Batsman</th>
+                    <th>Bowler</th>
+                    <th>Discription</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let score of detailScoreB">
+                    <td>{{score.run}}</td>
+                    <td>{{score.wickets}}</td>
+                    <td>{{score.batId}}</td>
+                    <td>{{score.ballerId}}</td>
+                    <td>{{score.discription}}</td>
+                  </tr>
+                </tbody>
+              </table> 
             </div>
       </div>
-          <table class="table table-striped">
-            <thead>
-              <tr>
-                <th>Run</th>
-                <th>Wicket</th>
-                <th>Batsman</th>
-                <th>Bowler</th>
-                <th>Discription</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let score of detailScore">
-                <td>{{score.run}}</td>
-                <td>{{score.wickets}}</td>
-                <td>{{score.batId}}</td>
-                <td>{{score.ballerId}}</td>
-                <td>{{score.discription}}</td>
-              </tr>
-            </tbody>
-          </table>
   </div>
