@@ -73,6 +73,8 @@ teams=[];
   viewCompletedMatchScore(match) {
     if(match.Match_Status==='COMPLETED') {
       this.router.navigate(['/view-score'], { queryParams: { id: match.Match_Id } });
+    } else if(match.Match_Status==='LIVE') {
+      this.router.navigate(['/view-live-score'], { queryParams: { id: match.Match_Id } });
     }
   }
 

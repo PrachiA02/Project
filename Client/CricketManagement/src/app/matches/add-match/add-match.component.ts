@@ -20,6 +20,7 @@ export class AddMatchComponent implements OnInit {
   selectedMatchType : any;
   
   teams = [];
+  teamsForBatting = [];
   matchTypes = [
     {
       matchTypeId: 1,
@@ -71,8 +72,20 @@ export class AddMatchComponent implements OnInit {
       allowSearchFilter: false
     };
   }
-  onItemSelect(item: any) {
-    console.log(item);
+  onItemSelect(team: any) {
+    if(this.teamsForBatting.length === 0) {
+      this.teamsForBatting = [];
+      this.teamsForBatting.push(team);
+    } else {
+      this.teamsForBatting = [];
+      if(this.firstTeam.length > 0){
+        this.teamsForBatting.push(this.firstTeam[0]);
+      }
+      if(this.secondTeam.length > 0){
+        this.teamsForBatting.push(this.secondTeam[0]);
+      }
+      
+    }
   }
   onTeamASelect(team: any){
     

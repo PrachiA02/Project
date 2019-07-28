@@ -10,7 +10,7 @@
             [data]="teams"
             [(ngModel)]="firstTeam"
             [settings]="teamDropdownSettings"
-            (onSelect)="onTeamASelect($event)"
+            (onSelect)="onItemSelect($event)"
             (onSelectAll)="onSelectAll($event)"></ng-multiselect-dropdown></div>
         </div>
       </div>
@@ -61,7 +61,7 @@
           <label class="white" for="">Batting Team</label>
           <div class="white-background"><ng-multiselect-dropdown
             [placeholder]="'Select Batting Team'"
-            [data]="teams"
+            [data]="teamsForBatting"
             [(ngModel)]="battingTeam"
             [settings]="teamDropdownSettings"
             (onSelect)="onItemSelect($event)"
