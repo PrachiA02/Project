@@ -1,34 +1,33 @@
 <h1>Add Team</h1>
 
 <div class="container" style="margin-top: 40px;">
-    <div class="form-group">
-      <label for="">Name</label>
-      <input [(ngModel)]="name" type="text" class="form-control">
+  <div class="form-group">
+    <label for="">Name</label>
+    <input [(ngModel)]="name" type="text" class="form-control">
   </div>
-    <div class="form-group">
-      <label for="">Country</label>
-      <input [(ngModel)]="country" type="text" class="form-control">
-    </div>
+  <div class="form-group">
+    <label for="">Country</label>
+    <input [(ngModel)]="country" type="text" class="form-control">
+  </div>
 </div>
 
 <div class="container">
-    <div class="form-group">
-      <label for="">File</label>
-      <input (change)="onSelectTeamIcon($event)" type="file" class="form-control">
-    </div>
+  <div class="form-group">
+    <label for="">File</label>
+    <input (change)="onSelectTeamIcon($event)" type="file" class="form-control">
+  </div>
 
-    <div class="row">
-      <div class="col-md-6">
-        <div class="form-group">
-          <button (click)="onAdd()" class="btn btn-success">Add</button>
-          <button (click)="onCancel()" class="btn btn-danger" style="margin-left: 10px;">Cancel</button>
-        </div>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group">
+        <button (click)="onAdd()" class="btn btn-success">Add</button>
+        <button (click)="onCancel()" class="btn btn-danger" style="margin-left: 10px;">Cancel</button>
       </div>
     </div>
-  
+  </div>
+
   <div class="col-md-6" *ngIf="imageUrl != undefined">
     <label for="">Preview</label>
     <img class="team-icon" [src]="imageUrl" alt="">
   </div>
 </div>
-

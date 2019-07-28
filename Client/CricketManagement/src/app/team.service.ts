@@ -20,11 +20,11 @@ export class TeamService {
     return this.http.delete(this.url + '/' + id);
   }
   post(teamIcon: any, name: string, country: string) {
-      const formData = new FormData();
-      formData.append('teamIcon', teamIcon);
-      formData.append('name', name);
-      formData.append('country', country);
-    
-      return this.http.post(this.url, formData);
-    }
+    const formData = new FormData();
+    formData.append('teamIcon', teamIcon);
+    formData.append('name', name);
+    formData.append('country', country);
+
+    return this.http.post(this.url, formData);
+  }
 }

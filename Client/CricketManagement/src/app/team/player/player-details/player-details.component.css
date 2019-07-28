@@ -9,3 +9,6 @@ div {
     color: mediumblue;
   }
   
+  .btn {
+    float: right;
+  }

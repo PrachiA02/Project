@@ -38,10 +38,10 @@ export class AddPlayerComponent implements OnInit {
 
   onAdd() {
     this.playerService
-      .post(this.playerPhoto, this.name, this.birthDate, this.age, this.majorTeams, this.playingRole, this.batingStyle, this.bowlingStyle,this.nativePlace, this.description)
+      .post(this.playerPhoto, this.name, this.birthDate, this.age, this.majorTeams, this.playingRole, this.batingStyle, this.bowlingStyle, this.nativePlace, this.description)
       .subscribe(response => {
         console.log(response);
-        const body  = response.json();
+        const body = response.json();
         if (body['status'] == 'success') {
           this.name = '';
           this.imageUrl = undefined;

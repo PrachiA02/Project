@@ -14,10 +14,10 @@ export class LiveMatchesComponent implements OnInit {
   allTeams = [];
 
   constructor(private matchService: MatchesService,
-    private teamService: TeamService) { 
+    private teamService: TeamService) {
     let matchRequest = this.matchService.getMatchesByStatus("LIVE");
-      let teamRequest = this.teamService.get();
-      forkJoin(teamRequest, matchRequest)
+    let teamRequest = this.teamService.get();
+    forkJoin(teamRequest, matchRequest)
       .subscribe(response => {
         const teamResponseBody = response[0].json();
         this.allTeams = [];
@@ -25,12 +25,12 @@ export class LiveMatchesComponent implements OnInit {
           this.allTeams.push({
             teamId: team.Team_Id,
             teamName: team.Team_Name,
-            teamIcon: team.Team_Icon 
+            teamIcon: team.Team_Icon
           });
         });
 
         const matchesResponseBody = response[1].json();
-        
+
         this.liveMatches = [];
         matchesResponseBody.data.forEach(liveMatch => {
           let teamA = this.getTeamDetails(liveMatch.Team_A);
@@ -43,17 +43,17 @@ export class LiveMatchesComponent implements OnInit {
             teamBName: teamB.teamName,
             teamBIcon: teamB.teamIcon
           });
-          
+
         });
-     });
+      });
   }
 
   ngOnInit() {
   }
   private getTeamDetails(teamId: number) {
-    let teamDetails : any;
+    let teamDetails: any;
     this.allTeams.forEach(team => {
-      if(team.teamId === teamId){
+      if (team.teamId === teamId) {
         teamDetails = team;
       }
     });

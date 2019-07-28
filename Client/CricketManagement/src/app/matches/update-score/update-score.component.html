@@ -1,117 +1,108 @@
-
 <div class="container">
 
-  <div class="btn-div">
-    <button (click)="onAddTeam()" class="btn score-btn">Score Card</button>
-    <button (click)="onAddTeam()" class="btn score-btn">Team Details</button>
-  </div>
-  <div>
-      <a href="javascript:window.location.href=window.location.href" class="link">Refresh Page</a>
-  </div> 
-  <div>
-      <button type="submit" class="button">Live</button>
-  </div>
-  <div class="match-type">{{matchType}}</div>
-  <div class="score">
+    <div class="btn-div">
+        <button (click)="onAddTeam()" class="btn score-btn">Score Card</button>
+        <button (click)="onAddTeam()" class="btn score-btn">Team Details</button>
+    </div>
+    <div>
+        <a href="javascript:window.location.href=window.location.href" class="link">Refresh Page</a>
+    </div>
+    <div>
+        <button type="submit" class="button">Live</button>
+    </div>
+    <div class="match-type">{{matchType}}</div>
+    <div class="score">
         <div class="team1-wrapper">
             <div class="team1-label">
                 {{teamAName}}
                 <span class="batting" *ngIf="teamAId === battingTeamId">- Batting </span>
-              </div>
-              <div class="team1-score">
-                  <div class="col-md-6 topmargin">
-                      <div class="form-group">
+            </div>
+            <div class="team1-score">
+                <div class="col-md-6 topmargin">
+                    <div class="form-group">
                         <label for="">Batsman</label>
-                        <ng-multiselect-dropdown
-                          [placeholder]="'-- Select --'"
-                          [data]="teamAPlayers"
-                          [(ngModel)]="batId"
-                          [settings]="batmanDropdownSettings"
-                          (onSelect)="onItemSelect($event)"></ng-multiselect-dropdown>
-                      </div>
-                  </div>
-                  <div class="col-md-6 topmargin">
-                      <div class="form-group">
+                        <ng-multiselect-dropdown [placeholder]="'-- Select --'" [data]="teamAPlayers" [(ngModel)]="batId"
+                            [settings]="batmanDropdownSettings" (onSelect)="onItemSelect($event)"></ng-multiselect-dropdown>
+                    </div>
+                </div>
+                <div class="col-md-6 topmargin">
+                    <div class="form-group">
                         <label for="">Bowler</label>
-                        <ng-multiselect-dropdown
-                          [placeholder]="'-- Select --'"
-                          [data]="teamBPlayers"
-                          [(ngModel)]="ballerId"
-                          [settings]="batmanDropdownSettings"
-                          (onSelect)="onItemSelect($event)"></ng-multiselect-dropdown>
-                      </div>
-                  </div>
-                  <div class="col-md-6 topmargin">
+                        <ng-multiselect-dropdown [placeholder]="'-- Select --'" [data]="teamBPlayers" [(ngModel)]="ballerId"
+                            [settings]="batmanDropdownSettings" (onSelect)="onItemSelect($event)"></ng-multiselect-dropdown>
+                    </div>
+                </div>
+                <div class="col-md-6 topmargin">
                     <label>Over</label>
                     <input [(ngModel)]="overs" type="number" class="form-control">
-                  </div>
-                  <div class="col-md-6 topmargin">
-                      <label>Ball</label>
-                      <input [(ngModel)]="balls" type="number" class="form-control">
-                  </div>
-                  <div class="col-md-6 topmargin">
-                      <label>Runs</label>
-                      <input [(ngModel)]="runs" type="number" class="form-control">
-                  </div>
-                  <div class="col-md-6 topmargin">
-                      <label>Wickets</label>
-                      <input [(ngModel)]="wickets" type="number" class="form-control">
-                  </div>
-                  <div class="col-md-12 topmargin">
-                      <label>Discription</label>
-                      <textarea [(ngModel)]="discription" class="form-control" rows="5"></textarea>
-                  </div>
-                  <div class="col-md-6">
+                </div>
+                <div class="col-md-6 topmargin">
+                    <label>Ball</label>
+                    <input [(ngModel)]="balls" type="number" class="form-control">
+                </div>
+                <div class="col-md-6 topmargin">
+                    <label>Runs</label>
+                    <input [(ngModel)]="runs" type="number" class="form-control">
+                </div>
+                <div class="col-md-6 topmargin">
+                    <label>Wickets</label>
+                    <input [(ngModel)]="wickets" type="number" class="form-control">
+                </div>
+                <div class="col-md-12 topmargin">
+                    <label>Discription</label>
+                    <textarea [(ngModel)]="discription" class="form-control" rows="5"></textarea>
+                </div>
+                <div class="col-md-6">
                     <div class="form-group">
-                      <button (click)="onSave()" class="btn btn-success">Save</button>
-                      <button (click)="onCancel()" class="btn btn-danger" style="margin-left: 10px;">Cancel</button>
+                        <button (click)="onSave()" class="btn btn-success">Save</button>
+                        <button (click)="onCancel()" class="btn btn-danger" style="margin-left: 10px;">Cancel</button>
                     </div>
-                  </div>
-              </div>
+                </div>
+            </div>
         </div>
         <div class="separator">
-        VS
+            VS
         </div>
         <div class="team2-wrapper">
-          <div class="team2">
-              <span  class="batting" *ngIf="teamBId === battingTeamId">Batting - </span>
-              {{teamBName}}
+            <div class="team2">
+                <span class="batting" *ngIf="teamBId === battingTeamId">Batting - </span>
+                {{teamBName}}
             </div>
             <div class="team2-score">
                 <div class="col-md-6 topmargin">
                     <label>Total Runs:</label>
                     <input [(ngModel)]="teamAScore.runs" type="number" class="form-control" disabled>
-                  </div>
-                  <div class="col-md-6 topmargin">
-                      <label>Total Wickets:</label>
-                      <input [(ngModel)]="teamAScore.wickets" type="number" class="form-control" disabled>
-                  </div>
-                  <div class="col-md-6 topmargin">
-                        <label>Overs:</label>
-                        <input [(ngModel)]="teamAScore.overs" type="number" class="form-control" disabled>
-                  </div>
-            </div>  
+                </div>
+                <div class="col-md-6 topmargin">
+                    <label>Total Wickets:</label>
+                    <input [(ngModel)]="teamAScore.wickets" type="number" class="form-control" disabled>
+                </div>
+                <div class="col-md-6 topmargin">
+                    <label>Overs:</label>
+                    <input [(ngModel)]="teamAScore.overs" type="number" class="form-control" disabled>
+                </div>
+            </div>
             <div class="team-inning-change">
-              <div class="topmargin">
-                  <button (click)="onChnageInning()" class="btn">Change  Innings</button>
-                  <button (click)="onFinishMatch()" class="btn leftPadding">Finish Match</button>
-              </div>    
+                <div class="topmargin">
+                    <button (click)="onChnageInning()" class="btn">Change Innings</button>
+                    <button (click)="onFinishMatch()" class="btn leftPadding">Finish Match</button>
+                </div>
             </div>
             <div class="team1-score">
                 <div class="topmargin">
                     <label>Team {{teamBName}} Score</label>
-                  </div>
+                </div>
                 <div class="">
                     <label>Total Runs: {{teamBScore.runs}}</label>
                 </div>
                 <div class="">
-                  <label>Wickets: {{teamBScore.wickets}}</label>
+                    <label>Wickets: {{teamBScore.wickets}}</label>
                 </div>
                 <div class="">
                     <label>Overs: {{teamBScore.overs}}</label>
                 </div>
-            </div>  
-          </div>
+            </div>
+        </div>
     </div>
-  
+
 </div>>

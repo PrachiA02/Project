@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
 
-@Injectable(    )
+@Injectable()
 export class UserService implements CanActivate {
 
   url = 'http://localhost:3000/user';
@@ -36,8 +36,8 @@ export class UserService implements CanActivate {
       password: password
     };
 
-    const headers = new Headers({'Content-Type': 'application/json'});
-    const requestOptions = new RequestOptions({headers: headers});
+    const headers = new Headers({ 'Content-Type': 'application/json' });
+    const requestOptions = new RequestOptions({ headers: headers });
 
     return this.http.post(this.url + '/register', body, requestOptions);
   }
@@ -53,24 +53,24 @@ export class UserService implements CanActivate {
       password: password
     };
 
-    const headers = new Headers({'Content-Type': 'application/json'});
-    const requestOptions = new RequestOptions({headers: headers});
+    const headers = new Headers({ 'Content-Type': 'application/json' });
+    const requestOptions = new RequestOptions({ headers: headers });
 
     this.http.post(this.url + '/login', body, requestOptions)
-    .subscribe(response => {
-      let userResponse = response.json();
-      if (userResponse['status'] == 'success') {
-        let userId = userResponse.data.User_Id;
-        let userName = userResponse.data.First_Name + ' ' + userResponse.data.Last_Name;
-        sessionStorage.setItem('loginStatus', '1');
-        localStorage.setItem('userId', userId);
-        localStorage.setItem('userName', userName);
-        alert("Welcome " +userName);
-        this.router.navigate(['/home']);
-      } else {
-        alert('Invalid Credential');
-      }
-    });
+      .subscribe(response => {
+        let userResponse = response.json();
+        if (userResponse['status'] == 'success') {
+          let userId = userResponse.data.User_Id;
+          let userName = userResponse.data.First_Name + ' ' + userResponse.data.Last_Name;
+          sessionStorage.setItem('loginStatus', '1');
+          localStorage.setItem('userId', userId);
+          localStorage.setItem('userName', userName);
+          alert("Welcome " + userName);
+          this.router.navigate(['/home']);
+        } else {
+          alert('Invalid Credential');
+        }
+      });
   }
 
 }

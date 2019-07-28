@@ -14,14 +14,14 @@ import { TeamPlayerMappingService } from 'src/app/team-player-mapping.service';
 export class ViewLiveScoreComponent implements OnInit {
 
   matchId: number;
-  teamAScore : any;
-  teamBScore : any;
-  battingTeamId : number;
+  teamAScore: any;
+  teamBScore: any;
+  battingTeamId: number;
   teamBId: number;
   teamAId: number;
   allTeams = [];
-  teamBName : string;
-  teamAName : string;
+  teamBName: string;
+  teamAName: string;
   matchType: string;
   detailScore = [];
   allPlayers = [];
@@ -31,35 +31,35 @@ export class ViewLiveScoreComponent implements OnInit {
     private matchService: MatchesService,
     private teamService: TeamService,
     private teamPlayerMappingService: TeamPlayerMappingService) {
-      activatedRoute.queryParams
-        .subscribe(params => {
-          this.matchId = params['id'];
+    activatedRoute.queryParams
+      .subscribe(params => {
+        this.matchId = params['id'];
 
-          let matchRequest = this.matchService.getDetails(this.matchId);
-         let teamRequest = this.teamService.get();
-         forkJoin(teamRequest, matchRequest)
-        .subscribe(response => {
-          const teamResponseBody = response[0].json();
-          this.allTeams = [];
-          teamResponseBody.data.forEach(team => {
-            this.allTeams.push({
-              teamId: team.Team_Id,
-              teamName: team.Team_Name,
-              teamIcon: team.Team_Icon 
+        let matchRequest = this.matchService.getDetails(this.matchId);
+        let teamRequest = this.teamService.get();
+        forkJoin(teamRequest, matchRequest)
+          .subscribe(response => {
+            const teamResponseBody = response[0].json();
+            this.allTeams = [];
+            teamResponseBody.data.forEach(team => {
+              this.allTeams.push({
+                teamId: team.Team_Id,
+                teamName: team.Team_Name,
+                teamIcon: team.Team_Icon
+              });
             });
-          });
 
-          const matchesResponseBody = response[1].json();
-          let teamA : any;
-          let teamB : any;
-          if(matchesResponseBody.data.Batting_Team === matchesResponseBody.data.Team_A) {
-            teamA = this.getTeamDetails(matchesResponseBody.data.Team_A);
-            teamB = this.getTeamDetails(matchesResponseBody.data.Team_B);
-          } else {
-            teamA = this.getTeamDetails(matchesResponseBody.data.Team_B);
-            teamB = this.getTeamDetails(matchesResponseBody.data.Team_A);
-          }
-            
+            const matchesResponseBody = response[1].json();
+            let teamA: any;
+            let teamB: any;
+            if (matchesResponseBody.data.Batting_Team === matchesResponseBody.data.Team_A) {
+              teamA = this.getTeamDetails(matchesResponseBody.data.Team_A);
+              teamB = this.getTeamDetails(matchesResponseBody.data.Team_B);
+            } else {
+              teamA = this.getTeamDetails(matchesResponseBody.data.Team_B);
+              teamB = this.getTeamDetails(matchesResponseBody.data.Team_A);
+            }
+
             this.matchType = matchesResponseBody.data.Match_Type;
             this.teamAId = teamA.teamId;
             this.teamAName = teamA.teamName;
@@ -71,74 +71,74 @@ export class ViewLiveScoreComponent implements OnInit {
             this.getPlayersForBothTeams();
             this.getUpdatedScoreDetails();
           });
-    });
+      });
   }
 
   ngOnInit() {
   }
-  private getUpdatedScore(){
+  private getUpdatedScore() {
     this.scoreService.getScoreByMatchId(this.matchId, this.battingTeamId)
-    .subscribe(response => {
-      let scoreResponse = response.json();
-      let overs = Math.floor(scoreResponse.data.Balls/6);
-      let balls = scoreResponse.data.Balls%6;
+      .subscribe(response => {
+        let scoreResponse = response.json();
+        let overs = Math.floor(scoreResponse.data.Balls / 6);
+        let balls = scoreResponse.data.Balls % 6;
         this.teamAScore = {
           runs: scoreResponse.data.Runs,
           wickets: scoreResponse.data.Wickets,
           overs: overs + '.' + balls
         };
-    });
+      });
   }
-  private getUpdatedScoreDetails(){
+  private getUpdatedScoreDetails() {
     this.scoreService.getRecentScoreByMatchId(this.matchId, this.battingTeamId)
-    .subscribe(response => {
-      let scoreResponse = response.json();
-      this.detailScore = [];
-      scoreResponse.data.forEach(score => {
-        this.detailScore.push({
-          run: score.Runs,
-          wickets: score.Wickets,
-          discription: score.Discription,
-          batId: this.allPlayers[score.Bat_Id] ? this.allPlayers[score.Bat_Id] : score.Bat_Id,
-          ballerId: this.allPlayers[score.Baller_Id] ? this.allPlayers[score.Baller_Id] : score.Baller_Id
+      .subscribe(response => {
+        let scoreResponse = response.json();
+        this.detailScore = [];
+        scoreResponse.data.forEach(score => {
+          this.detailScore.push({
+            run: score.Runs,
+            wickets: score.Wickets,
+            discription: score.Discription,
+            batId: this.allPlayers[score.Bat_Id] ? this.allPlayers[score.Bat_Id] : score.Bat_Id,
+            ballerId: this.allPlayers[score.Baller_Id] ? this.allPlayers[score.Baller_Id] : score.Baller_Id
+          });
         });
       });
-    });
   }
   private getPlayersForBothTeams() {
     let teamAPlayersRequest = this.teamPlayerMappingService.getPlayersByTeamId(this.teamAId);
     let teamBPlayersRequest = this.teamPlayerMappingService.getPlayersByTeamId(this.teamBId);
     forkJoin(teamAPlayersRequest, teamBPlayersRequest)
-    .subscribe(response =>{
-      this.allPlayers = [];
-      let teamAPlayersResponse = response[0].json();
-      teamAPlayersResponse.data.forEach(player => {
-        this.allPlayers[player.Player_Id] = player.Player_Name;
-      });
+      .subscribe(response => {
+        this.allPlayers = [];
+        let teamAPlayersResponse = response[0].json();
+        teamAPlayersResponse.data.forEach(player => {
+          this.allPlayers[player.Player_Id] = player.Player_Name;
+        });
 
-      let teamBPlayersResponse = response[1].json();
-      teamBPlayersResponse.data.forEach(player => {
-        this.allPlayers[player.Player_Id] = player.Player_Name;
+        let teamBPlayersResponse = response[1].json();
+        teamBPlayersResponse.data.forEach(player => {
+          this.allPlayers[player.Player_Id] = player.Player_Name;
+        });
       });
-    });
   }
-  private getOtherTeamScore(){
+  private getOtherTeamScore() {
     this.scoreService.getScoreByMatchId(this.matchId, this.teamBId)
-    .subscribe(response => {
-      let scoreResponse = response.json();
-      let overs = Math.floor(scoreResponse.data.Balls/6);
-      let balls = scoreResponse.data.Balls%6;
+      .subscribe(response => {
+        let scoreResponse = response.json();
+        let overs = Math.floor(scoreResponse.data.Balls / 6);
+        let balls = scoreResponse.data.Balls % 6;
         this.teamBScore = {
           runs: scoreResponse.data.Runs,
           wickets: scoreResponse.data.Wickets,
           overs: overs + '.' + balls
         };
-    });
+      });
   }
   private getTeamDetails(teamId: number) {
-    let teamDetails : any;
+    let teamDetails: any;
     this.allTeams.forEach(team => {
-      if(team.teamId === teamId){
+      if (team.teamId === teamId) {
         teamDetails = team;
       }
     });

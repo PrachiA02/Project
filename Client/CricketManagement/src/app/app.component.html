@@ -1,42 +1,42 @@
 <div class="cricket-management">
-<nav class="navbar navbar-inverse">
-    <div class="container">
-        <div class="navbar-header">
-            <a class="navbar-brand">
-              <img src="assets/images/cricket.png" class="logo">
-            </a>
-            <span class="navbar-brand">
-                <a routerLink="./home" routerLinkActive="active" class="cricket-link">Cricket Management System</a>
-            </span>
-        </div>
-        <ul class="nav navbar-nav">
-            <li class="dropdown" dropdown> 
-                <a dropdownToggle role="button">Team<span class="caret"></span></a>
-                <ul *dropdownMenu class="dropdown-menu">
+    <nav class="navbar navbar-inverse">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand">
+                    <img src="assets/images/cricket.png" class="logo">
+                </a>
+                <span class="navbar-brand">
+                    <a routerLink="./home" routerLinkActive="active" class="cricket-link">Cricket Management System</a>
+                </span>
+            </div>
+            <ul class="nav navbar-nav">
+                <li class="dropdown" dropdown>
+                    <a dropdownToggle role="button">Team<span class="caret"></span></a>
+                    <ul *dropdownMenu class="dropdown-menu">
                         <li><a routerLink="./team" routerLinkActive="active">Team</a></li>
                         <li role="separator" class="divider"></li>
                         <li><a routerLink="./player" routerLinkActive="active">Player</a></li>
                     </ul>
-            </li>
-            <li class="dropdown" dropdown> 
-                <a dropdownToggle role="button">Matches <span class="caret"></span></a>
-                <ul *dropdownMenu class="dropdown-menu">
-                    <li *ngIf="isUserLoggedIn()"><a routerLink="./add-match" routerLinkActive="active">Add Matches</a></li>
-                    <li *ngIf="isUserLoggedIn()" role="separator" class="divider"></li>
-                    <li><a routerLink="./matches" routerLinkActive="active">Matches</a></li>
-                </ul>
-            </li>
-        </ul>
-        <ul class="nav navbar-nav navbar-right" >
-            <li *ngIf="!isUserLoggedIn()"><a routerLink="./login" routerLinkActive="active" class="login">Login</a></li>
-            <li *ngIf="isUserLoggedIn()" class="user">{{userName}}</li>            
-            <li *ngIf="isUserLoggedIn()"><a routerLink="" (click)="logout()" class="login">Logout</a></li>
-        </ul>
-        
-        <ul class="nav navbar-nav navbar-right" >
-                <li><a routerLink="./contact-us" routerLinkActive="active">Contact Us</a></li>           
-        </ul>
-    </div>
-  </nav>
-<router-outlet></router-outlet>
+                </li>
+                <li class="dropdown" dropdown>
+                    <a dropdownToggle role="button">Matches <span class="caret"></span></a>
+                    <ul *dropdownMenu class="dropdown-menu">
+                        <li *ngIf="isUserLoggedIn()"><a routerLink="./add-match" routerLinkActive="active">Add Matches</a></li>
+                        <li *ngIf="isUserLoggedIn()" role="separator" class="divider"></li>
+                        <li><a routerLink="./matches" routerLinkActive="active">Matches</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li *ngIf="!isUserLoggedIn()"><a routerLink="./login" routerLinkActive="active" class="login">Login</a></li>
+                <li *ngIf="isUserLoggedIn()" class="user">{{userName}}</li>
+                <li *ngIf="isUserLoggedIn()"><a routerLink="" (click)="logout()" class="login">Logout</a></li>
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                <li><a routerLink="./contact-us" routerLinkActive="active">Contact Us</a></li>
+            </ul>
+        </div>
+    </nav>
+    <router-outlet></router-outlet>
 </div>

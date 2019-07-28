@@ -5,7 +5,7 @@ import { Http } from '@angular/http';
   providedIn: 'root'
 })
 export class TeamPlayerMappingService {
-  
+
   url = 'http://localhost:3000/teamPlayerMapping';
 
   constructor(private http: Http) { }

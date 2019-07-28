@@ -17,14 +17,14 @@ export class PlayerComponent implements OnInit {
     private router: Router,
     private playerService: PlayersService,
     private userService: UserService
-  ) { 
+  ) {
     this.loadPlayers();
   }
 
   ngOnInit() {
   }
   onSelectPlayer(player) {
-     this.router.navigate(['/player-details'], { queryParams: { id: player.Player_Id } });
+    this.router.navigate(['/player-details'], { queryParams: { id: player.Player_Id } });
   }
   showGrid() {
     this.isGrid = true;

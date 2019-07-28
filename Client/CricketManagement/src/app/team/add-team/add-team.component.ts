@@ -34,7 +34,7 @@ export class AddTeamComponent implements OnInit {
       .post(this.teamIcon, this.name, this.country)
       .subscribe(response => {
         console.log(response);
-        const body  = response.json();
+        const body = response.json();
         if (body['status'] == 'success') {
           this.name = '';
           this.country = '';

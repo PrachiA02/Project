@@ -17,8 +17,8 @@ export class AddMatchComponent implements OnInit {
   matchName: string;
   matchStadium: string;
   matchLocation: string;
-  selectedMatchType : any;
-  
+  selectedMatchType: any;
+
   teams = [];
   teamsForBatting = [];
   matchTypes = [
@@ -39,20 +39,20 @@ export class AddMatchComponent implements OnInit {
   constructor(private teamService: TeamService,
     private matchService: MatchesService, private router: Router) {
     this.teamService
-    .get()
-    .subscribe(response => {
-      const body = response.json();
-      this.teams = [];
-      body.data.forEach(team => {
-        this.teams.push({
-          teamId: team.Team_Id,
-          teamName: team.Team_Name
+      .get()
+      .subscribe(response => {
+        const body = response.json();
+        this.teams = [];
+        body.data.forEach(team => {
+          this.teams.push({
+            teamId: team.Team_Id,
+            teamName: team.Team_Name
+          });
         });
       });
-    });
-   }
-  
-   ngOnInit() {
+  }
+
+  ngOnInit() {
     this.matchTypeDropdownSettings = {
       singleSelection: true,
       idField: 'matchTypeId',
@@ -73,55 +73,54 @@ export class AddMatchComponent implements OnInit {
     };
   }
   onItemSelect(team: any) {
-    if(this.teamsForBatting.length === 0) {
+    if (this.teamsForBatting.length === 0) {
       this.teamsForBatting = [];
       this.teamsForBatting.push(team);
     } else {
       this.teamsForBatting = [];
-      if(this.firstTeam.length > 0){
+      if (this.firstTeam.length > 0) {
         this.teamsForBatting.push(this.firstTeam[0]);
       }
-      if(this.secondTeam.length > 0){
+      if (this.secondTeam.length > 0) {
         this.teamsForBatting.push(this.secondTeam[0]);
       }
-      
+
     }
   }
-  onTeamASelect(team: any){
-    
+  onTeamASelect(team: any) {
+
   }
   onSelectAll(items: any) {
     console.log(items);
   }
   onAdd() {
-    this.matchService
-    .post(this.matchName,this.firstTeam[0].teamId,
-      this.secondTeam[0].teamId,this.selectedMatchType[0].matchType,
-      this.matchStadium,this.matchLocation,this.battingTeam[0].teamId).subscribe(response=>{
-        console.log(response);
-        const body = response.json();
-        if(body['status']=='success'){
-          
-          this.onCancel();
-        } else {
-          alert(body['error']);
-        }
-      }); 
+    if (this.firstTeam === undefined ||
+      this.secondTeam === undefined ||
+      this.firstTeam.length === 0 ||
+      this.secondTeam.length === 0 ||
+      this.firstTeam[0].teamId === this.secondTeam[0].teamId) {
+      alert('Please select valid Teams');
+    } else if(this.battingTeam === undefined ||
+      this.battingTeam.length === 0){
+        alert('Please select valid batting Team');
+    }
+    else {
+      this.matchService
+        .post(this.matchName, this.firstTeam[0].teamId,
+          this.secondTeam[0].teamId, this.selectedMatchType[0].matchType,
+          this.matchStadium, this.matchLocation, this.battingTeam[0].teamId).subscribe(response => {
+            console.log(response);
+            const body = response.json();
+            if (body['status'] == 'success') {
+
+              this.onCancel();
+            } else {
+              alert(body['error']);
+            }
+          });
+    }
   }
   onCancel() {
     this.router.navigate(['/matches']);
   }
-  // private getStatusByDates() {
-  //   let todaysDate = new Date();
-  //   let selectedDate = new Date(this.matchDate);
-  //   let todaysDateString = todaysDate.getFullYear()+"-"+todaysDate.getMonth()+"-"+todaysDate.getDate();
-  //   let selectedDateString = selectedDate.getFullYear()+"-"+selectedDate.getMonth()+"-"+selectedDate.getDate();
-  //   if(todaysDateString === selectedDateString)
-  //   {
-  //    return "LIVE"; 
-  //   } else
-  //   {
-  //     return "FUTURE";
-  //   }
-  // }
 }

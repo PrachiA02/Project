@@ -1,83 +1,71 @@
 <div class="image">
-    <h1 class="white">Add Match</h1>
+  <h1 class="white">Add Match</h1>
 
-    <div class="container" style="margin-top: 40px;">
-      <div class="col-md-6">
-        <div class="form-group">
-          <label class="white" for="">First Team</label>
-          <div class="white-background"><ng-multiselect-dropdown
-            [placeholder]="'Select First Team'"
-            [data]="teams"
-            [(ngModel)]="firstTeam"
-            [settings]="teamDropdownSettings"
-            (onSelect)="onItemSelect($event)"
-            (onSelectAll)="onSelectAll($event)"></ng-multiselect-dropdown></div>
-        </div>
-      </div>
-      <div class="col-md-6">
-        <div class="form-group">
-          <label class="white" for="">Second Team</label>
-          <div class="white-background"><ng-multiselect-dropdown
-            [placeholder]="'Select Second Team'"
-            [data]="teams"
-            [(ngModel)]="secondTeam"
-            [settings]="teamDropdownSettings"
-            (onSelect)="onItemSelect($event)"
-            (onSelectAll)="onSelectAll($event)"></ng-multiselect-dropdown></div>
-        </div>
-      </div>
-      <div class="col-md-6">
-        <div class="form-group">
-          <label class="white" for="">Match/Series Name</label>
-          <input [(ngModel)]="matchName" type="text" class="form-control">
-        </div>
-      </div>
-      <div class="col-md-6">
-        <div class="form-group">
-          <label class="white" for="">Match Stadium</label>
-          <input [(ngModel)]="matchStadium" type="text" class="form-control">
-        </div>
-      </div>
-      <div class="col-md-6">
-          <div class="form-group">
-            <label class="white" for="">Match Type</label>
-            <div class="white-background"><ng-multiselect-dropdown
-            [placeholder]="'Select Match Type'"
-            [data]="matchTypes"
-            [(ngModel)]="selectedMatchType"
-            [settings]="matchTypeDropdownSettings"
-            (onSelect)="onItemSelect($event)"
-            (onSelectAll)="onSelectAll($event)"></ng-multiselect-dropdown></div>
-        </div>
-      </div>
-      <div class="col-md-6">
-        <div class="form-group">
-          <label class="white" for="">Match Location</label>
-          <input [(ngModel)]="matchLocation" type="text" class="form-control">
-        </div>
-      </div>
-      <div class="col-md-6">
-        <div class="form-group">
-          <label class="white" for="">Batting Team</label>
-          <div class="white-background"><ng-multiselect-dropdown
-            [placeholder]="'Select Batting Team'"
-            [data]="teamsForBatting"
-            [(ngModel)]="battingTeam"
-            [settings]="teamDropdownSettings"
-            (onSelect)="onItemSelect($event)"
-            (onSelectAll)="onSelectAll($event)"></ng-multiselect-dropdown></div>
+  <div class="container" style="margin-top: 40px;">
+    <div class="col-md-6">
+      <div class="form-group">
+        <label class="white" for="">First Team</label>
+        <div class="white-background">
+          <ng-multiselect-dropdown [placeholder]="'Select First Team'" [data]="teams" [(ngModel)]="firstTeam"
+            [settings]="teamDropdownSettings" (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)"></ng-multiselect-dropdown>
         </div>
       </div>
     </div>
-    
-    <div class="container">
-        <div class="row">
-          <div class="col-md-6">
-            <div class="form-group">
-              <button (click)="onAdd()" class="btn btn-success">Add</button>
-              <button (click)="onCancel()" class="btn btn-danger" style="margin-left: 10px;">Cancel</button>
-            </div>
-          </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label class="white" for="">Second Team</label>
+        <div class="white-background">
+          <ng-multiselect-dropdown [placeholder]="'Select Second Team'" [data]="teams" [(ngModel)]="secondTeam"
+            [settings]="teamDropdownSettings" (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)"></ng-multiselect-dropdown>
         </div>
-    </div>    
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label class="white" for="">Match/Series Name</label>
+        <input [(ngModel)]="matchName" type="text" class="form-control">
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label class="white" for="">Match Stadium</label>
+        <input [(ngModel)]="matchStadium" type="text" class="form-control">
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label class="white" for="">Match Type</label>
+        <div class="white-background">
+          <ng-multiselect-dropdown [placeholder]="'Select Match Type'" [data]="matchTypes" [(ngModel)]="selectedMatchType"
+            [settings]="matchTypeDropdownSettings" (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)"></ng-multiselect-dropdown>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label class="white" for="">Match Location</label>
+        <input [(ngModel)]="matchLocation" type="text" class="form-control">
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label class="white" for="">Batting Team</label>
+        <div class="white-background">
+          <ng-multiselect-dropdown [placeholder]="'Select Batting Team'" [data]="teamsForBatting" [(ngModel)]="battingTeam"
+            [settings]="teamDropdownSettings" (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)"></ng-multiselect-dropdown>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <button (click)="onAdd()" class="btn btn-success">Add</button>
+          <button (click)="onCancel()" class="btn btn-danger" style="margin-left: 10px;">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

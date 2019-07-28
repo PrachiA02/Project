@@ -2,26 +2,19 @@
   <div class="pull-right buttons">
     <button *ngIf="isUserLoggedIn()" (click)="onAddTeam()" class="btn btn-success add-team">Add Team</button>
     <button (click)="toggleGrid()" type="button" class="btn btn-primary">
-      <i
-        [class.glyphicon-align-justify]="isGrid == true"
-        [class.glyphicon-th-large]="isGrid == false"
-        class="glyphicon"></i>
+      <i [class.glyphicon-align-justify]="isGrid == true" [class.glyphicon-th-large]="isGrid == false" class="glyphicon"></i>
     </button>
   </div>
 </div>
 
 <div class="container" *ngIf="isGrid == true">
-  <div
-    (click)="onSelectTeam(team)"
-    style="margin-top: 10px; cursor: pointer"
-    class="col-md-3"
-    *ngFor="let team of teams">
+  <div style="margin-top: 10px; cursor: pointer" class="col-md-3" *ngFor="let team of teams">
 
+    <img class="team-icon" src="http://localhost:3000/{{team.Team_Icon}}" alt="" (click)="onSelectTeam(team)">
+    <div class="title">{{team.Team_Name}}</div>
     <button *ngIf="isUserLoggedIn()" (click)="onDelete(team)" class="btn btn-danger delete-button">
       <i class="glyphicon glyphicon-trash"></i>
     </button>
-    <img class="team-icon" src="http://localhost:3000/{{team.Team_Icon}}" alt="">
-    <div class="title">{{team.Team_Name}}</div>
   </div>
 </div>
 
@@ -41,12 +34,12 @@
         <td>{{team.Team_Name}}</td>
         <td>{{team.Country_Name}}</td>
         <td class="action" *ngIf="isUserLoggedIn()">
-            <button (click)="onDelete(team)" class="btn btn-danger delete-button">
-                <i class="glyphicon glyphicon-trash"></i>
-            </button>
-            <button (click)="onUpdate(team)" class="btn btn-warning edit-button">
-                <i class="glyphicon glyphicon-edit"></i>
-            </button>
+          <button (click)="onDelete(team)" class="btn btn-danger delete-button">
+            <i class="glyphicon glyphicon-trash"></i>
+          </button>
+          <button (click)="onUpdate(team)" class="btn btn-warning edit-button">
+            <i class="glyphicon glyphicon-edit"></i>
+          </button>
         </td>
       </tr>
     </tbody>

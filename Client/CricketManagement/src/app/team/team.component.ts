@@ -16,7 +16,7 @@ export class TeamComponent implements OnInit {
     private router: Router,
     private teamService: TeamService,
     private userService: UserService
-  ) { 
+  ) {
     this.loadTeams();
   }
 
@@ -44,7 +44,7 @@ export class TeamComponent implements OnInit {
           if (body['status'] == 'success') {
             this.loadTeams();
           }
-        })
+        });
     }
   }
 
