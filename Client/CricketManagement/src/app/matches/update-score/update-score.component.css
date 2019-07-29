@@ -49,11 +49,6 @@
     justify-content: center;
     display: flex;
 }
-.score-btn {
-    margin-right: 20px;
-    border-radius: 20px;
-    margin-top: 15px;
-}
 
 .match-type {
     text-align: center;

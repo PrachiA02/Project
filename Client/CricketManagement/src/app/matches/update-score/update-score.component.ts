@@ -14,8 +14,8 @@ import { ScoreService } from 'src/app/score.service';
 })
 export class UpdateScoreComponent implements OnInit {
   batmanDropdownSettings = {};
-  batId = {};
-  ballerId = {};
+  batId = [];
+  ballerId = [];
   battingTeamId: number;
   matchId: number;
   teamAId: number;
@@ -137,25 +137,35 @@ export class UpdateScoreComponent implements OnInit {
       });
   }
   onSave() {
-    this.wickets = this.wickets ? this.wickets : 0;
-    this.discription = this.discription ? this.discription : '';
-    this.scoreService
-      .post(this.matchId, this.overs, this.balls, this.runs, this.batId[0].playerId, this.ballerId[0].playerId,
-        this.wickets, this.battingTeamId, this.discription)
-      .subscribe(response => {
-        console.log(response);
-        const body = response.json();
-        if (body['status'] == 'success') {
-          this.discription = "";
-          this.runs = undefined;
-          this.wickets = undefined;
-          this.balls = undefined;
-          this.overs = undefined;
-          this.getUpdatedScore();
-        } else {
-          alert(body['error']);
-        }
-      });
+    if (this.batId === undefined || this.batId.length === 0) {
+      alert('Please select Battsman');
+    } else if (this.ballerId === undefined || this.ballerId.length === 0) {
+      alert('Please select baller');
+    } else if (this.runs === undefined) {
+      alert('Please enter valid runs');
+    } else if (this.overs === undefined) {
+      alert('Please enter valid overs');
+    } else {
+      this.wickets = this.wickets ? this.wickets : 0;
+      this.discription = this.discription ? this.discription : '';
+      this.scoreService
+        .post(this.matchId, this.overs, this.balls, this.runs, this.batId[0].playerId, this.ballerId[0].playerId,
+          this.wickets, this.battingTeamId, this.discription)
+        .subscribe(response => {
+          console.log(response);
+          const body = response.json();
+          if (body['status'] == 'success') {
+            this.discription = "";
+            this.runs = undefined;
+            this.wickets = undefined;
+            this.balls = undefined;
+            this.overs = undefined;
+            this.getUpdatedScore();
+          } else {
+            alert(body['error']);
+          }
+        });
+    }
   }
 
   private getUpdatedScore() {
@@ -185,7 +195,7 @@ export class UpdateScoreComponent implements OnInit {
       });
   }
   onCancel() {
-    this.router.navigate(['/update-score'], { queryParams: { id: this.matchId } });
+    this.router.navigate(['/matches'], { queryParams: { id: this.matchId } });
   }
 
   onChnageInning() {

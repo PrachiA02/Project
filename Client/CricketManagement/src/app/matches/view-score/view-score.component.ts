@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ScoreService } from 'src/app/score.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MatchesService } from 'src/app/matches.service';
 import { TeamService } from 'src/app/team.service';
 import { forkJoin } from 'rxjs';
@@ -31,7 +31,8 @@ export class ViewScoreComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private matchService: MatchesService,
     private teamService: TeamService,
-    private teamPlayerMappingService: TeamPlayerMappingService) {
+    private teamPlayerMappingService: TeamPlayerMappingService,
+    private router:Router) {
     activatedRoute.queryParams
       .subscribe(params => {
         this.matchId = params['id'];
@@ -163,5 +164,9 @@ export class ViewScoreComponent implements OnInit {
       }
     });
     return teamDetails;
+  }
+
+  onBack(){
+    this.router.navigate(['/matches']);
   }
 }

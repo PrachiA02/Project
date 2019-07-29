@@ -3,11 +3,11 @@ h1 {
 }
 
 .image{
-  height:40em; 
+  min-height: 53.5em; 
   background-size:cover;
   width:auto;
   background-image: url(../../../../src/assets/images/stadium.jpg);
-  background-position:50% 50%;
+  background-position:center;
 }
 
 .white-background{
@@ -15,4 +15,7 @@ h1 {
 }
 .white {
   color: white;
+  margin-top: 0px;
+  padding-top: 20px;
+  margin-bottom: 0px;
 }

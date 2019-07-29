@@ -17,8 +17,8 @@
   }
 
 .player-photo {
-  height: 250px;
-  width: 250px;
+  height: 200px;
+  width: 200px;
 }  
 td .delete-button {
   position: relative;
@@ -36,4 +36,9 @@ td .edit-button {
 }
 .buttons .add-player {
   margin-right: 20px;
+}
+
+.player-icon{
+  height: 215px;
+  width: 165px;
 }

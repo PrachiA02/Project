@@ -30,21 +30,32 @@ export class AddTeamComponent implements OnInit {
   }
 
   onAdd() {
-    this.teamService
-      .post(this.teamIcon, this.name, this.country)
-      .subscribe(response => {
-        console.log(response);
-        const body = response.json();
-        if (body['status'] == 'success') {
-          this.name = '';
-          this.country = '';
-          this.imageUrl = undefined;
-          this.teamIcon = undefined;
-          this.onCancel();
-        } else {
-          alert(body['error']);
-        }
-      });
+    if (this.name === undefined ||
+      this.name.length === 0) {
+      alert('Please enter name');
+    } else if (this.country === undefined ||
+      this.country.length === 0) {
+      alert('Please enter Country');
+    } else if (this.teamIcon === undefined ||
+      this.teamIcon.length === 0) {
+      alert('Please select TeamIcon');
+    } else {
+      this.teamService
+        .post(this.teamIcon, this.name, this.country)
+        .subscribe(response => {
+          console.log(response);
+          const body = response.json();
+          if (body['status'] == 'success') {
+            this.name = '';
+            this.country = '';
+            this.imageUrl = undefined;
+            this.teamIcon = undefined;
+            this.onCancel();
+          } else {
+            alert(body['error']);
+          }
+        });
+    }
   }
 
   onCancel() {

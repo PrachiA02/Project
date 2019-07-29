@@ -114,4 +114,8 @@ export class TeamDetailsComponent implements OnInit {
   isUserLoggedIn() {
     return this.userService.isUserLogin();
   }
+
+  onBack(){
+    this.router.navigate(['/team']);
+  }
 }
